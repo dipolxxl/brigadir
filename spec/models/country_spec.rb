@@ -13,7 +13,8 @@ require 'spec_helper'
 describe Country do
 
   # ActiveRecord
-  # validation for 'has_many :brigades'
+  it { should have_many(:brigades).dependent(:destroy) }
+  it { should have_db_column(:name).of_type(:string) }
 
   # ActiveModel
   it { should validate_presence_of(:name) }

@@ -9,6 +9,7 @@
 #
 
 class Country < ActiveRecord::Base
+  has_many :brigades, dependent: :destroy
   attr_accessible :name
 
   validates :name, presence:   true,
