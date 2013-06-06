@@ -1,7 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# encoding: utf-8
 #
-# Examples:
+# Автозаполнение таблицы с странами
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+
+if Country.exists?
+  puts "Список стран не пустой!"
+  exit
+end
+
+countries = %w(Австрия Беларусь Венгрия Гавайи Италия Мексика Россия)
+countries.each do | country_name |
+  Country.create! name: country_name  
+end
+puts 'Создан новый список стран.'
