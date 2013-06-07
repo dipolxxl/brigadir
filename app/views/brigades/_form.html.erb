@@ -21,11 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :cost %><br />
-    <%= f.text_field :cost %>
+    <%= f.number_field :cost %>
   </div>
   <div class="field">
     <%= f.label :country %><br />
-    <%= f.text_field :country %>
+    <%= f.select :country_id, countries_for_select %>
   </div>
   <div class="actions">
     <%= f.submit %>

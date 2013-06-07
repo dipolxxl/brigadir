@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: brigades
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)      default(""), not null
+#  workers    :integer          default(0), not null
+#  cost       :integer          default(0), not null
+#  country_id :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'spec_helper'
 
 describe Brigade do
@@ -7,6 +20,7 @@ describe Brigade do
   it { should have_db_column(:name).of_type(:string) }
   it { should have_db_column(:cost).of_type(:integer) }
   it { should have_db_column(:workers).of_type(:integer) }
+  it { should have_db_column(:country_id).of_type(:integer) }
 
   # ActiveModel
   it { should validate_presence_of(:name) }
