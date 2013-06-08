@@ -9,7 +9,7 @@ if Country.exists?
   exit
 end
 
-countries = %w(Австрия Беларусь Венгрия Гавайи Италия Мексика Россия)
+countries = %w(австрия беларусь венгрия гавайи италия мексика россия)
 countries.each do | country_name |
   Country.create! name: country_name  
 end

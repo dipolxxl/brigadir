@@ -1,7 +1,9 @@
 class BrigadesController < ApplicationController
   before_filter :brigade_finder, only: [:show, :edit, :update, :destroy]
+
   def index
-    @brigades = Brigade.all
+    @brigades = Brigade.order(:created_at)
+    tag_cloud
   end
 
   def show
@@ -35,6 +37,10 @@ class BrigadesController < ApplicationController
   def destroy
     @brigade.destroy
     redirect_to brigades_url
+  end
+
+  def tag_cloud
+    @tags = Brigade.tag_counts_on(:tags)
   end
 
   private

@@ -13,7 +13,9 @@
 
 class Brigade < ActiveRecord::Base
   belongs_to :country
-  attr_accessible :cost, :name, :workers, :country_id
+  acts_as_taggable
+
+  attr_accessible :cost, :name, :workers, :country_id, :tag_list
 
   validates :name, presence:   true,
                    uniqueness: true,

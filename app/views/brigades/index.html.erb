@@ -16,7 +16,7 @@
     <td><%= brigade.name %></td>
     <td><%= brigade.workers %></td>
     <td><%= brigade.cost %></td>
-    <td><%= brigade.country %></td>
+    <td><%= brigade_country(brigade) %></td>
     <td><%= link_to 'Show', brigade %></td>
     <td><%= link_to 'Edit', edit_brigade_path(brigade) %></td>
     <td><%= link_to 'Destroy', brigade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -25,5 +25,7 @@
 </table>
 
 <br />
+
+
 
 <%= link_to 'New Brigade', new_brigade_path %>

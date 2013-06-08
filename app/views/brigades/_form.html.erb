@@ -24,6 +24,10 @@
     <%= f.number_field :cost %>
   </div>
   <div class="field">
+    <%= f.label 'Skills' %><br />
+    <%= f.text_field :tag_list %>
+  </div>
+  <div class="field">
     <%= f.label :country %><br />
     <%= f.select :country_id, countries_for_select %>
   </div>
