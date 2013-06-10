@@ -18,13 +18,30 @@ Feature: Manage brigades
     And I fill in "Name" with "Test_brigade"
     And I fill in "Workers" with "5"
     And I fill in "Cost" with "350"
-    # this is ugly ;(  (brigade[tag_list])
+    # this is ugly :(  (brigade[tag_list])
     And I fill in "brigade[tag_list]" with "roof"
-    And I choose the country - "Poland"
+    And I choose the country - "poland"
     And I press "Create Brigade"
     Then I should see "Brigade was successfully created."
     And I should see "Test_brigade"
     And I should have 1 brigade
+
+  # DRY this!
+  Scenario: Create Invalid Brigade
+    Given I have no brigades
+    And I have countries titled "Russia", "Poland"
+    And I am on the list of brigades
+    When I follow "New Brigade"
+    And I fill in "Name" with ""
+    And I fill in "Workers" with "1"
+    And I fill in "Cost" with "10"
+    # this is ugly :(  (brigade[tag_list])
+    And I fill in "brigade[tag_list]" with "roof"
+    And I choose the country - "poland"
+    And I press "Create Brigade"
+    Then I should see "2 errors prohibited this brigade from being saved:"
+    And I should see "Name can't be blank"
+    And I should see "Name is too short (minimum is 4 characters)"
 
   Scenario: Show Brigade
     Given I have brigades titled "Test_brigade"
@@ -37,5 +54,23 @@ Feature: Manage brigades
     # cost (default)
     And I should see "100"
     # country (default)
-    And I should see "Country"
+    And I should see "Country_"
     And I should see "Edit | Back"
+
+  Scenario: Update Brigade
+    Given I have brigades titled "Test_brigade"
+    And I have countries titled "Russia", "Poland"
+    And I am on the list of brigades
+    When I follow "Edit"
+    And I fill in "Name" with "Test_brigade_upd"
+    And I choose the country - "poland"
+    And I press "Update Brigade"
+    Then I should see "Brigade was successfully updated."
+    And I should see "Test_brigade_upd"
+    And I should see "poland"
+
+  Scenario: Destroy Brigade
+    Given I have brigades titled "Test_brigade"
+    And I am on the list of brigades
+    When I follow "Destroy"
+    Then I should have 0 brigade

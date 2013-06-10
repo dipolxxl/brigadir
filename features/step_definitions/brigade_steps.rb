@@ -28,7 +28,6 @@ When(/^I press "(.*?)"$/) do |arg|
   click_on(arg)
 end
 
-
 When(/^I fill in "(.*?)" with "(.*?)"$/) do |field, value|
   fill_in(field, with: value)
 end
@@ -36,7 +35,6 @@ end
 When(/^I choose the country \- "(.*?)"$/) do |value|
   select(value, from: 'brigade[country_id]')
 end
-
 
 Then(/^I should see "(.*?)"$/) do |arg|
   page.should have_content(arg)
