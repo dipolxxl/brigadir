@@ -1,8 +1,9 @@
 class BrigadesController < ApplicationController
   before_filter :brigade_finder, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   def index
-    @brigades = Brigade.order(:created_at)
+    @brigades = Brigade.order(sort_column + ' ' + sort_direction)
     tag_cloud
   end
 
@@ -47,5 +48,13 @@ class BrigadesController < ApplicationController
 
   def brigade_finder
     @brigade = Brigade.where(id: params[:id]).first
+  end
+
+  def sort_column
+    Brigade.column_names.include?(params[:sort]) ? params[:sort] : 'cost'
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 end

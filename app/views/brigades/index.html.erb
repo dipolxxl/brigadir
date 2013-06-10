@@ -1,21 +1,18 @@
 <h1>Listing brigades</h1>
 
-<table>
+<table class="pretty">
   <tr>
     <th>Name</th>
-    <th>Workers</th>
-    <th>Cost</th>
+    <th><%= sortable 'workers' %></th>
+    <th><%= sortable 'cost' %></th>
     <th>Country</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @brigades.each do |brigade| %>
   <tr>
     <td><%= brigade.name %></td>
     <td><%= brigade.workers %></td>
-    <td><%= brigade.cost %></td>
+    <td><%= number_to_currency(brigade.cost) %></td>
     <td><%= brigade_country(brigade) %></td>
     <td><%= link_to 'Show', brigade %></td>
     <td><%= link_to 'Edit', edit_brigade_path(brigade) %></td>
