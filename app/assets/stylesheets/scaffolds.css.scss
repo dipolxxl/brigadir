@@ -67,3 +67,14 @@ div {
     list-style: square;
   }
 }
+
+#tag_cloud {
+  width: 400px;
+  line-height: 1.6em;
+
+/*  not elegantly
+
+  .css1 { font-size: 0.8em; }
+  .css2 { font-size: 1.2em; }
+  .css3 { font-size: 1.8em; }*/
+}

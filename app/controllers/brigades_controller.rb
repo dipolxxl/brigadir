@@ -3,8 +3,11 @@ class BrigadesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @brigades = Brigade.order(sort_column + ' ' + sort_direction)
-    tag_cloud
+    if params[:tag]
+      @brigades = Brigade.tagged_with(params[:tag])
+    else
+      @brigades = Brigade.order(sort_column + ' ' + sort_direction)
+    end
   end
 
   def show
@@ -38,10 +41,6 @@ class BrigadesController < ApplicationController
   def destroy
     @brigade.destroy
     redirect_to brigades_url
-  end
-
-  def tag_cloud
-    @tags = Brigade.tag_counts_on(:tags)
   end
 
   private

@@ -1,11 +1,19 @@
 <h1>Listing brigades</h1>
 
+<div id="tag_cloud">
+  Skills cloud:
+  <% tag_cloud(Brigade.tag_counts, %w[css1 css2 css3]) do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
+</div><br />
+
 <table class="pretty">
   <tr>
     <th>Name</th>
     <th><%= sortable 'workers' %></th>
     <th><%= sortable 'cost' %></th>
     <th>Country</th>
+    <th>Skills</th>
   </tr>
 
 <% @brigades.each do |brigade| %>
@@ -14,9 +22,10 @@
     <td><%= brigade.workers %></td>
     <td><%= number_to_currency(brigade.cost) %></td>
     <td><%= brigade_country(brigade) %></td>
+    <td><%= raw list_of_tags(brigade) %></td>
     <td><%= link_to 'Show', brigade %></td>
     <td><%= link_to 'Edit', edit_brigade_path(brigade) %></td>
-    <td><%= link_to 'Destroy', brigade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Destroy', brigade, method: :delete, confirm: 'Are you sure?' %></td>
   </tr>
 <% end %>
 </table>
@@ -24,5 +33,6 @@
 <br />
 
 
-
 <%= link_to 'New Brigade', new_brigade_path %>
+<br />
+<%= link_to 'Reset all filters', brigades_path %>
