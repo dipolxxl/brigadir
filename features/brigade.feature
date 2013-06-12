@@ -94,3 +94,15 @@ Feature: Manage brigades
         Then I should see "Test_1"
         And I should not see "Test_2"
         And I should not see "Test_3"
+
+  Scenario: Tags Smart Link
+    Given I have brigade titled "Test_1" with tags "roof, sanitary"
+    And I have brigade titled "Test_2" with tags "laminate, sanitary"
+    And I am on the list of brigades
+    And I should see "roof x 1"
+    And I should see "sanitary x 2"
+    And I should see "laminate x 1"
+    When I press first link "Destroy"
+    Then I should see "sanitary x 1"
+    And I should see "laminate x 1"
+    And I should not see "roof"

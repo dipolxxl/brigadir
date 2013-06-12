@@ -1,10 +1,7 @@
 <h1>Listing brigades</h1>
 
 <div id="tag_cloud">
-  Skills cloud:
-  <% tag_cloud(Brigade.tag_counts, %w[css1 css2 css3]) do |tag, css_class| %>
-    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
-  <% end %>
+  Skills cloud: <%= raw smart_link_for_tag %>
 </div><br />
 
 <table class="pretty">
