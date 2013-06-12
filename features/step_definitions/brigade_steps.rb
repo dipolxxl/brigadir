@@ -15,6 +15,9 @@ Given(/^I am on (.+)$/) do |page_name|
   visit path_to(page_name)
 end
 
+Given(/^I have brigade titled "(.*?)" with tags "(.*?)"$/) do |name, tags|
+  FactoryGirl.create(:brigade, name: name, tag_list: tags)
+end
 
 When(/^I go to (.+)$/) do |page_name|
   visit path_to(page_name)
@@ -28,6 +31,10 @@ When(/^I press "(.*?)"$/) do |arg|
   click_on(arg)
 end
 
+When(/^I press first link "(.*?)"$/) do |arg|
+  first(:link, arg).click
+end
+
 When(/^I fill in "(.*?)" with "(.*?)"$/) do |field, value|
   fill_in(field, with: value)
 end
@@ -38,6 +45,10 @@ end
 
 Then(/^I should see "(.*?)"$/) do |arg|
   page.should have_content(arg)
+end
+
+Then(/^I should not see "(.*?)"$/) do |arg|
+  page.should_not have_content(arg)
 end
 
 Then(/^I should have (\d+) brigade$/) do |count|

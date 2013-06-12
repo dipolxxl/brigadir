@@ -74,3 +74,23 @@ Feature: Manage brigades
     And I am on the list of brigades
     When I follow "Destroy"
     Then I should have 0 brigade
+
+  Scenario: Working With Tags
+    Given I have brigade titled "Test_1" with tags "roof, sanitary"
+    And I have brigade titled "Test_2" with tags "laminate, sanitary"
+    And I have brigade titled "Test_3" with tags "laminate"
+    And I am on the list of brigades
+        When I press first link "laminate"
+        Then I should see "Test_2"
+        And I should see "Test_3"
+        And I should not see "Test_1"
+
+        When I press "Reset all filters"
+        Then I should see "Test_1"
+        And I should see "Test_2"
+        And I should see "Test_3"
+
+        When I press first link "roof"
+        Then I should see "Test_1"
+        And I should not see "Test_2"
+        And I should not see "Test_3"
